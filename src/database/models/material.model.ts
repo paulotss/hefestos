@@ -19,6 +19,10 @@ Material.init({
     allowNull: false,
     type: STRING,
   },
+  image: {
+    allowNull: false,
+    type: STRING
+  },
   productId: {
     allowNull: false,
     type: INTEGER,
