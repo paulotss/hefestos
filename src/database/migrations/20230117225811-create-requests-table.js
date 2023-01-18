@@ -12,7 +12,7 @@ module.exports = {
       },
       status: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
       },
       user_id: {
         allowNull: false,

@@ -17,7 +17,7 @@ Request.init({
   },
   status: {
     allowNull: false,
-    type: STRING,
+    type: INTEGER,
   },
   productId: {
     allowNull: false,
