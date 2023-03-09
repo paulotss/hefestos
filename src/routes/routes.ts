@@ -8,4 +8,9 @@ routes.get(
   (req, res, next) => new ProductController(req, res, next).getAll()
 );
 
+routes.get(
+  '/products/:id',
+  (req, res, next) => new ProductController(req, res, next).getByCategory()
+)
+
 export default routes;
