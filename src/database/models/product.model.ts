@@ -50,7 +50,7 @@ Product.init({
 }, {
   sequelize: db,
   modelName: 'product',
-  timestamps: true,
+  timestamps: false,
   tableName: 'products'
 });
 
