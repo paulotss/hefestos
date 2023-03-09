@@ -1,5 +1,6 @@
-import { Model, INTEGER, STRING, INET } from "sequelize";
+import { Model, INTEGER, STRING } from "sequelize";
 import db from '.';
+import Category from "./category";
 
 class Product extends Model {
   declare id: number;
@@ -47,11 +48,18 @@ Product.init({
     allowNull: false,
     type: INTEGER,
   },
+  categoryId: {
+    allowNull: false,
+    type: INTEGER,
+  }
 }, {
   sequelize: db,
   modelName: 'product',
   timestamps: false,
+  underscored: true,
   tableName: 'products'
 });
+
+Product.belongsTo(Category, { foreignKey: 'categoryId', as: 'categories' });
 
 export default Product;
