@@ -11,6 +11,11 @@ routes.get(
 routes.get(
   '/products/:id',
   (req, res, next) => new ProductController(req, res, next).getByCategory()
-)
+);
+
+routes.get(
+  '/product/:id',
+  (req, res, next) => new ProductController(req, res, next).getById()
+);
 
 export default routes;

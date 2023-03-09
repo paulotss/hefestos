@@ -15,6 +15,12 @@ class ProductService {
     if (!products) throw new CustomError('Not found', 404);
     return products;
   }
+
+  public async getById(productId: number) {
+    const product = await Product.findByPk(productId);
+    if(!product) throw new CustomError("Not found", 404);
+    return product;
+  }
 }
 
 export default ProductService;

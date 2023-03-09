@@ -24,10 +24,19 @@ class ProductController {
     try {
       const products = await this.service.getByCategory(Number(id));
       this.response.status(200).json(products);
-    } catch(error) {
+    } catch (error) {
       this.next(error);
     }
-    
+  }
+
+  public async getById() {
+    const { id } = this.request.params;
+    try {
+      const product = await this.service.getById(Number(id));
+      this.response.status(200).json(product);
+    } catch (error) {
+      this.next(error);
+    }
   }
 }
 
