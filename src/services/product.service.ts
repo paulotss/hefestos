@@ -27,6 +27,7 @@ class ProductService {
     const result = await Product.create({
       title: product.title,
       description: product.description,
+      cover: product.cover,
       amount: product.amount,
       width: product.width,
       height: product.height,

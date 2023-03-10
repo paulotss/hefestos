@@ -28,6 +28,10 @@ Product.init({
     allowNull: false,
     type: STRING,
   },
+  cover: {
+    allowNull: false,
+    type: STRING,
+  },
   amount: {
     allowNull: false,
     type: INTEGER,

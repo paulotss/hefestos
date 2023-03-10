@@ -7,6 +7,7 @@ module.exports = {
       {
         title: "Produto Um",
         description: "Isso é uma descrição teste um",
+        cover: "",
         amount: 5,
         width: 82,
         height: 34,
@@ -18,6 +19,7 @@ module.exports = {
       {
         title: "Produto Dois",
         description: "Isso é uma descrição teste dois",
+        cover: "",
         amount: 8,
         width: 56,
         height: 75,
@@ -29,6 +31,7 @@ module.exports = {
       {
         title: "Produto Três",
         description: "Isso é uma descrição teste três",
+        cover: "",
         amount: 9,
         width: 15,
         height: 75,
@@ -40,6 +43,7 @@ module.exports = {
       {
         title: "Produto Quatro",
         description: "Isso é uma descrição teste quatro",
+        cover: "",
         amount: 11,
         width: 90,
         height: 65,
@@ -51,6 +55,7 @@ module.exports = {
       {
         title: "Produto Cinco",
         description: "Isso é uma descrição teste cinco",
+        cover: "",
         amount: 20,
         width: 40,
         height: 70,

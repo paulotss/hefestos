@@ -4,6 +4,7 @@ interface IProduct {
   id?: number;
   title: string;
   description: string;
+  cover: string;
   amount: number;
   width: number;
   height: number;

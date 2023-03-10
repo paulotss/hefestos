@@ -18,6 +18,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
+      cover: {
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
       amount: {
         allowNull: false,
         type: Sequelize.INTEGER,
