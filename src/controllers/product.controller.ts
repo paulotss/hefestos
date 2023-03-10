@@ -49,6 +49,17 @@ class ProductController {
       this.next(error);
     }
   }
+
+  public async update() {
+    try {
+      const { id } = this.request.params;
+      const values = this.request.body;
+      const result = await this.service.update(Number(id), values);
+      this.response.status(201).json(result);
+    } catch (error) {
+      this.next(error);
+    }
+  }
 }
 
 export default ProductController;

@@ -37,6 +37,13 @@ class ProductService {
     });
     return result;
   }
+
+  public async update(id: number, values: any) {
+    const result =  await Product.update(values, {
+      where: { id: id }
+    });
+    return result;
+  }
 }
 
 export default ProductService;

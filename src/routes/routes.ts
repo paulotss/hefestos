@@ -23,4 +23,9 @@ routes.post(
   (req, res, next) => new ProductController(req, res, next).create()
 );
 
+routes.put(
+  '/product/:id',
+  (req, res, next) => new ProductController(req, res, next).update()
+);
+
 export default routes;
