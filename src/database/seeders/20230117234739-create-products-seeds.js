@@ -13,6 +13,7 @@ module.exports = {
         depth: 64,
         weight: 85,
         price: 10.99,
+        category_id: 1,
       },
       {
         title: "Produto Dois",
@@ -23,6 +24,7 @@ module.exports = {
         depth: 35,
         weight: 520,
         price: 20.80,
+        category_id: 2,
       },
       {
         title: "Produto Três",
@@ -33,6 +35,7 @@ module.exports = {
         depth: 45,
         weight: 123,
         price: 30.10,
+        category_id: 3,
       },
       {
         title: "Produto Quatro",
@@ -43,6 +46,7 @@ module.exports = {
         depth: 450,
         weight: 120,
         price: 32.14,
+        category_id: 4,
       },
       {
         title: "Produto Cinco",
@@ -53,6 +57,7 @@ module.exports = {
         depth: 200,
         weight: 30,
         price: 100.99,
+        category_id: 5,
       },
     ]);
   },
