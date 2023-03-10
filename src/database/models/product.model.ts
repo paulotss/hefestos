@@ -1,4 +1,4 @@
-import { Model, INTEGER, STRING } from "sequelize";
+import { Model, INTEGER, STRING, FLOAT } from "sequelize";
 import db from '.';
 import Category from "./category";
 
@@ -48,6 +48,10 @@ Product.init({
     allowNull: false,
     type: INTEGER,
   },
+  price: {
+    allowNull: false,
+    type: FLOAT,
+  },
   categoryId: {
     allowNull: false,
     type: INTEGER,
@@ -60,6 +64,6 @@ Product.init({
   tableName: 'products'
 });
 
-Product.belongsTo(Category, { foreignKey: 'categoryId', as: 'categories' });
+Product.belongsTo(Category, { foreignKey: 'categoryId', as: 'category' });
 
 export default Product;

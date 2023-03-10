@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import IProduct from '../interfaces/IProduct';
 import ProductService from '../services/product.service';
 
 class ProductController {
@@ -34,6 +35,16 @@ class ProductController {
     try {
       const product = await this.service.getById(Number(id));
       this.response.status(200).json(product);
+    } catch (error) {
+      this.next(error);
+    }
+  }
+
+  public async create() {
+    try {
+      const product: IProduct = this.request.body;
+      const result = await this.service.create(product);
+      this.response.status(201).json(result);
     } catch (error) {
       this.next(error);
     }

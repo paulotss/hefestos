@@ -18,4 +18,9 @@ routes.get(
   (req, res, next) => new ProductController(req, res, next).getById()
 );
 
+routes.post(
+  '/product',
+  (req, res, next) => new ProductController(req, res, next).create()
+);
+
 export default routes;
