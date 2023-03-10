@@ -28,4 +28,9 @@ routes.put(
   (req, res, next) => new ProductController(req, res, next).update()
 );
 
+routes.delete(
+  '/product/:id',
+  (req, res, next) => new ProductController(req, res, next).remove()
+)
+
 export default routes;

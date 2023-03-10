@@ -44,6 +44,13 @@ class ProductService {
     });
     return result;
   }
+
+  public async remove(id: number) {
+    const result = await Product.destroy({
+      where: { id: id }
+    });
+    return result;
+  }
 }
 
 export default ProductService;

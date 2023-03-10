@@ -54,8 +54,18 @@ class ProductController {
     try {
       const { id } = this.request.params;
       const values = this.request.body;
-      const result = await this.service.update(Number(id), values);
-      this.response.status(201).json(result);
+      await this.service.update(Number(id), values);
+      this.response.sendStatus(201);
+    } catch (error) {
+      this.next(error);
+    }
+  }
+
+  public async remove() {
+    try {
+      const { id } = this.request.params;
+      await this.service.remove(Number(id));
+      this.response.sendStatus(200);
     } catch (error) {
       this.next(error);
     }
