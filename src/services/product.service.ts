@@ -9,7 +9,7 @@ class ProductService {
   }
 
   public async getByCategory(categoryId: number) {
-    const products = await Product.findOne({
+    const products = await Product.findAll({
       where: { categoryId: categoryId },
       include: 'category'
     });

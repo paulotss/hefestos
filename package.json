@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/paulotss/hefestos#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "sequelize": "^6.28.0"
