@@ -1,7 +1,18 @@
 import { Router } from 'express';
 import ProductController from '../controllers/product.controller';
+import multer from 'multer';
+import { extname } from 'path'
 
 const routes = Router();
+const storage = multer.diskStorage({
+  destination: function(_req, _res, cb) {
+    cb(null, 'src/media')
+  },
+  filename: function(_req, file, cb) {
+    cb(null, Date.now() + extname(file.originalname))
+  }
+})
+const upload = multer({storage: storage});
 
 routes.get(
   '/products',
@@ -20,6 +31,7 @@ routes.get(
 
 routes.post(
   '/product',
+  upload.single('file'),
   (req, res, next) => new ProductController(req, res, next).create()
 );
 

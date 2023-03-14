@@ -4,7 +4,7 @@ interface IProduct {
   id?: number;
   title: string;
   description: string;
-  cover: string;
+  cover: string | any;
   amount: number;
   width: number;
   height: number;
@@ -12,6 +12,7 @@ interface IProduct {
   weight: number;
   price: number;
   categoryId: number;
+  file?: any;
   category?: ICategory;
 }
 
