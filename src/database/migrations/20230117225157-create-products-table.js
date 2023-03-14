@@ -16,6 +16,10 @@ module.exports = {
       },
       description: {
         allowNull: false,
+        type: Sequelize.TEXT,
+      },
+      cover: {
+        allowNull: false,
         type: Sequelize.STRING,
       },
       amount: {
