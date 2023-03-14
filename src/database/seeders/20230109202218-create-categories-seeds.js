@@ -9,7 +9,7 @@ module.exports = {
         image: '',
       },
       {
-        title: 'Auto Peças',
+        title: 'Livros',
         image: '',
       },
       {

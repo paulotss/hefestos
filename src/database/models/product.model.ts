@@ -1,4 +1,4 @@
-import { Model, INTEGER, STRING, FLOAT } from "sequelize";
+import { Model, INTEGER, STRING, FLOAT, TEXT } from "sequelize";
 import db from '.';
 import Category from "./category";
 
@@ -26,7 +26,7 @@ Product.init({
   },
   description: {
     allowNull: false,
-    type: STRING,
+    type: TEXT,
   },
   cover: {
     allowNull: false,
