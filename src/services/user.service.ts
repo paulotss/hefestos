@@ -4,13 +4,13 @@ import CustomError from "../utils/CustomError";
 import JwtToken from "../utils/JwtToken";
 
 class UserService {
-  public login(data: ILogin) {
+  public async login(data: ILogin) {
     const { email, password } = data;
-    const result = User.findOne({
+    const result = await User.findOne({
       where: { email, password }
     });
     if (!result) throw new CustomError("Not found", 404);
-    const objToken = new JwtToken(data);
+    const objToken = new JwtToken(result);
     return objToken.token;
   }
 }

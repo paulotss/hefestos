@@ -18,7 +18,6 @@ const upload = multer({storage: storage});
 
 routes.get(
   '/products',
-  (req, res, next) => AuthHandle.auth(req, res, next),
   (req, res, next) => new ProductController(req, res, next).getAll()
 );
 
@@ -30,6 +29,12 @@ routes.get(
 routes.get(
   '/product/:id',
   (req, res, next) => new ProductController(req, res, next).getById()
+);
+
+routes.get(
+  '/user/products',
+  (req, res, next) => AuthHandle.auth(req, res, next),
+  (req, res, next) => new ProductController(req, res, next).getByUserId()
 );
 
 routes.post(

@@ -59,6 +59,10 @@ Product.init({
   categoryId: {
     allowNull: false,
     type: INTEGER,
+  },
+  userId: {
+    allowNull: false,
+    type: INTEGER,
   }
 }, {
   sequelize: db,
@@ -69,5 +73,6 @@ Product.init({
 });
 
 Product.belongsTo(Category, { foreignKey: 'categoryId', as: 'category' });
+Product.belongsTo(Category, { foreignKey: 'userId', as: 'user' });
 
 export default Product;

@@ -1,6 +1,7 @@
 import Product from '../database/models/product.model';
 import IProduct from '../interfaces/IProduct';
 import CustomError from '../utils/CustomError';
+import JwtToken from '../utils/JwtToken';
 
 class ProductService {
   public async getAll() {
@@ -21,6 +22,18 @@ class ProductService {
     const product = await Product.findByPk(productId);
     if(!product) throw new CustomError("Not found", 404);
     return product;
+  }
+
+  public async getByUserId(token: string) {
+    const jwt = JwtToken.verifyToken(token);
+    if (typeof jwt !== "string") {
+      const { id } = jwt.data;
+      const result = await Product.findAll({
+        where: {userId: id}
+      });
+      return result;
+    }
+    throw new CustomError("Invalid token", 403);
   }
 
   public async create(product: IProduct) {

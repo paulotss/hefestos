@@ -15,6 +15,7 @@ module.exports = {
         weight: 85,
         price: 203,
         category_id: 3,
+        user_id: 1,
       },
       {
         title: "Acessórios Para Banheiro, Quadrado",
@@ -27,6 +28,7 @@ module.exports = {
         weight: 520,
         price: 429,
         category_id: 3,
+        user_id: 1,
       },
       {
         title: "Dhammapada - Os Ensinamentos de Buda: Os ensinamentos de Buda",
@@ -39,6 +41,7 @@ module.exports = {
         weight: 123,
         price: 51.91,
         category_id: 2,
+        user_id: 2,
       },
       {
         title: "Biblioteca de Filosofia - Grandes Mestres | Kit com 4 Livros",
@@ -51,6 +54,7 @@ module.exports = {
         weight: 120,
         price: 32.14,
         category_id: 2,
+        user_id: 2,
       },
       {
         title: "Essencial da Filosofia Grega - Box 3 Livros",
@@ -63,6 +67,7 @@ module.exports = {
         weight: 30,
         price: 27,
         category_id: 2,
+        user_id: 3,
       },
     ]);
   },

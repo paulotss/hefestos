@@ -14,10 +14,10 @@ class UserController {
     this.service = new UserService();
   }
 
-  public login() {
+  public async login() {
     const login = this.request.body;
     try {
-      const token = this.service.login(login);
+      const token = await this.service.login(login);
       this.response.status(200).json(token);
     } catch (err) {
       this.next(err);
