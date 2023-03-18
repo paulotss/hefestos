@@ -7,3 +7,5 @@ interface IUser {
   cellPhone: string;
   whatsapp: string;
 }
+
+export default IUser;

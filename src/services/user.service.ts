@@ -1,5 +1,6 @@
 import User from "../database/models/users.model";
 import ILogin from "../interfaces/ILogin";
+import IUser from "../interfaces/IUser";
 import CustomError from "../utils/CustomError";
 import JwtToken from "../utils/JwtToken";
 
@@ -14,7 +15,7 @@ class UserService {
     return objToken.token;
   }
 
-  public async create(user: any) {
+  public async create(user: IUser) {
     const result = await User.create({ ...user });
     return result;
   }
