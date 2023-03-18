@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
+import IUser from '../interfaces/IUser';
 import UserService from '../services/user.service';
 
 class UserController {
@@ -21,6 +22,16 @@ class UserController {
       this.response.status(200).json(token);
     } catch (err) {
       this.next(err);
+    }
+  }
+
+  public async create() {
+    const user: IUser = this.request.body;
+    try {
+      const result = await this.service.create(user);
+      return this.response.status(200).json(result);
+    } catch (error) {
+      this.next(error);
     }
   }
 }
