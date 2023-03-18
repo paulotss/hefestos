@@ -16,6 +16,10 @@ class UserService {
   }
 
   public async create(user: IUser) {
+    const exist = await User.findOne({
+      where: { email: user.email }
+    });
+    if (exist) throw new CustomError("Email already exists", 409);
     const result = await User.create({ ...user });
     return result;
   }
