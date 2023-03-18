@@ -13,6 +13,11 @@ class UserService {
     const objToken = new JwtToken(result);
     return objToken.token;
   }
+
+  public async create(user: any) {
+    const result = await User.create({ ...user });
+    return result;
+  }
 }
 
 export default UserService;
