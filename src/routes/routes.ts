@@ -58,4 +58,9 @@ routes.post(
   (req, res, next) => new UserController(req, res, next).login()
 );
 
+routes.post(
+  '/user/create',
+  (req, res, next) => new UserController(req, res, next).create()
+);
+
 export default routes;
