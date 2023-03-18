@@ -23,6 +23,16 @@ class UserService {
     const result = await User.create({ ...user });
     return result;
   }
+
+  public async getUserById(token: string) {
+    const jwt = JwtToken.verifyToken(token);
+    if (typeof jwt !== "string") {
+      const { id } = jwt.data;
+      const result = await User.findByPk(Number(id));
+      return result;
+    }
+    throw new CustomError("Invalid token", 403);
+  }
 }
 
 export default UserService;
