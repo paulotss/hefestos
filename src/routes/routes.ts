@@ -58,6 +58,12 @@ routes.post(
   (req, res, next) => new UserController(req, res, next).login()
 );
 
+routes.get(
+  '/user',
+  (req, res, next) => AuthHandle.auth(req, res, next),
+  (req, res, next) => new UserController(req, res, next).getUserById()
+);
+
 routes.post(
   '/user/create',
   (req, res, next) => new UserController(req, res, next).create()
