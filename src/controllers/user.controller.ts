@@ -34,6 +34,17 @@ class UserController {
       this.next(error);
     }
   }
+
+  public async getUserById() {
+    const { authorization } = this.request.headers
+    if (!authorization) return this.response.sendStatus(403);
+    try {
+      const result = await this.service.getUserById(authorization);
+      return this.response.status(200).json(result);
+    } catch (error) {
+      this.next(error);
+    }
+  }
 }
 
 export default UserController;
