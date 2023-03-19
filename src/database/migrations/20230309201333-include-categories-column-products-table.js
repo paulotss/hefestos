@@ -13,9 +13,20 @@ module.exports = {
         key: 'id',
       }
     });
+    await queryInterface.addColumn('products', 'user_id', {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      references: {
+        model: {
+          tableName: 'users'
+        },
+        key: 'id',
+      }
+    });
   },
 
   async down (queryInterface, Sequelize) {
     await queryInterface.removeColumn('products', 'category_id');
+    await queryInterface.removeColumn('products', 'user_id');
   }
 };

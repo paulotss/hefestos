@@ -39,7 +39,7 @@ User.init({
     allowNull: false,
     type: STRING,
   },
-  wahtsapp: {
+  whatsapp: {
     allowNull: false,
     type: STRING,
   },
@@ -47,7 +47,7 @@ User.init({
   sequelize: db,
   underscored: true,
   modelName: 'user',
-  timestamps: true,
+  timestamps: false,
   tableName: 'users'
 });
 

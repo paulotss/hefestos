@@ -30,6 +30,17 @@ class ProductController {
     }
   }
 
+  public async getByUserId() {
+    const { authorization } = this.request.headers;
+    if (!authorization) return this.response.sendStatus(403);
+    try {
+      const result = await this.service.getByUserId(authorization);
+      return this.response.status(200).json(result);
+    } catch (error) {
+      this.next(error);
+    }
+  }
+
   public async getById() {
     const { id } = this.request.params;
     try {

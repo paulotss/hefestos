@@ -2,6 +2,8 @@ import { Router } from 'express';
 import ProductController from '../controllers/product.controller';
 import multer from 'multer';
 import { extname } from 'path'
+import UserController from '../controllers/user.controller';
+import AuthHandle from '../middlewares/AuthHandle';
 
 const routes = Router();
 const storage = multer.diskStorage({
@@ -29,6 +31,12 @@ routes.get(
   (req, res, next) => new ProductController(req, res, next).getById()
 );
 
+routes.get(
+  '/user/products',
+  (req, res, next) => AuthHandle.auth(req, res, next),
+  (req, res, next) => new ProductController(req, res, next).getByUserId()
+);
+
 routes.post(
   '/product',
   upload.single('file'),
@@ -43,6 +51,22 @@ routes.put(
 routes.delete(
   '/product/:id',
   (req, res, next) => new ProductController(req, res, next).remove()
-)
+);
+
+routes.post(
+  '/login',
+  (req, res, next) => new UserController(req, res, next).login()
+);
+
+routes.get(
+  '/user',
+  (req, res, next) => AuthHandle.auth(req, res, next),
+  (req, res, next) => new UserController(req, res, next).getUserById()
+);
+
+routes.post(
+  '/user/create',
+  (req, res, next) => new UserController(req, res, next).create()
+);
 
 export default routes;
