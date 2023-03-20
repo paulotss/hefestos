@@ -12,6 +12,7 @@ interface IProduct {
   weight: number;
   price: number;
   categoryId: number;
+  userId: number;
   file?: any;
   category?: ICategory;
 }
