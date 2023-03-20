@@ -6,35 +6,35 @@ module.exports = {
     await queryInterface.bulkInsert('categories', [
       {
         title: 'Imóveis',
-        image: '',
+        image: 'properties.png',
       },
       {
         title: 'Livros',
-        image: '',
+        image: 'services.png',
       },
       {
         title: 'Casa',
-        image: '',
+        image: 'home.png',
       },
       {
         title: 'Eletrônicos',
-        image: '',
+        image: 'eletronics.png',
       },
       {
         title: 'Empregos',
-        image: '',
+        image: 'jobs.png',
       },
       {
         title: 'Serviços',
-        image: '',
+        image: 'services.png',
       },
       {
         title: 'Moda e beleza',
-        image: '',
+        image: 'fashion.png',
       },
       {
         title: 'Lazer',
-        image: '',
+        image: 'leisure.png',
       },
     ]);
   },

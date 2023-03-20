@@ -4,6 +4,7 @@ import multer from 'multer';
 import { extname } from 'path'
 import UserController from '../controllers/user.controller';
 import AuthHandle from '../middlewares/AuthHandle';
+import CategoryController from '../controllers/category.controller';
 
 const routes = Router();
 const storage = multer.diskStorage({
@@ -67,6 +68,11 @@ routes.get(
 routes.post(
   '/user/create',
   (req, res, next) => new UserController(req, res, next).create()
+);
+
+routes.get(
+  '/categories',
+  (req, res, next) => new CategoryController(req, res, next).getAll()
 );
 
 export default routes;
