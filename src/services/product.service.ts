@@ -47,7 +47,8 @@ class ProductService {
       depth: product.depth,
       weight: product.weight,
       price: product.price,
-      categoryId: product.categoryId
+      categoryId: product.categoryId,
+      userId: product.userId
     });
     return result;
   }
