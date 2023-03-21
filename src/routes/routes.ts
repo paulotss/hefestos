@@ -75,4 +75,9 @@ routes.get(
   (req, res, next) => new CategoryController(req, res, next).getAll()
 );
 
+routes.get(
+  '/category/:id',
+  (req, res, next) => new CategoryController(req, res, next).getById()
+);
+
 export default routes;
