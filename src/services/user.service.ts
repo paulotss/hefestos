@@ -1,3 +1,4 @@
+import Adress from "../database/models/adress.model";
 import User from "../database/models/users.model";
 import ILogin from "../interfaces/ILogin";
 import IUser from "../interfaces/IUser";
@@ -28,7 +29,10 @@ class UserService {
     const jwt = JwtToken.verifyToken(token);
     if (typeof jwt !== "string") {
       const { id } = jwt.data;
-      const result = await User.findByPk(Number(id));
+      const result = await User.findByPk(Number(id), {
+        include: { model: Adress, as: "adress" },
+        attributes: { exclude: ['password'] }
+      });
       return result;
     }
     throw new CustomError("Invalid token", 403);

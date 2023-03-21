@@ -51,11 +51,12 @@ Adress.init({
 }, {
   sequelize: db,
   modelName: 'adress',
-  timestamps: true,
+  timestamps: false,
   underscored: true,
   tableName: 'adresses',
 });
 
 Adress.belongsTo(User, { foreignKey: 'userId', as: 'user' });
+User.hasOne(Adress, { foreignKey: 'userId', as: 'adress' })
 
 export default Adress;
