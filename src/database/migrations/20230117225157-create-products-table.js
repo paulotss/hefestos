@@ -23,23 +23,23 @@ module.exports = {
         type: Sequelize.STRING,
       },
       amount: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.INTEGER,
       },
       width: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.INTEGER,
       },
       height: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.INTEGER,
       },
       depth: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.INTEGER,
       },
       weight: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.INTEGER,
       },
       price: {

@@ -80,4 +80,9 @@ routes.get(
   (req, res, next) => new CategoryController(req, res, next).getById()
 );
 
+routes.delete(
+  '/product/:id',
+  (req, res, next) => new ProductController(req, res, next).remove()
+);
+
 export default routes;
