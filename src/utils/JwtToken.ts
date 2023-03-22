@@ -6,9 +6,9 @@ class JwtToken {
   private secret: string;
 
   constructor(payload: User) {
-    this.secret = 'shhhh'
+    this.secret = process.env.JWT_SECRET || 'M4secretPD'
     this._token = jwt.sign({ data: payload }, this.secret, {
-      expiresIn: "1h"
+      expiresIn: "1d"
     });
   }
 
@@ -17,7 +17,7 @@ class JwtToken {
   }
 
   public static verifyToken(token: string) {
-    const result = jwt.verify(token, 'shhhh');
+    const result = jwt.verify(token, process.env.JWT_SECRET || 'M4secretPD');
     return result;
   }
 }

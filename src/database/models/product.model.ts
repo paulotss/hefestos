@@ -1,6 +1,7 @@
 import { Model, INTEGER, STRING, FLOAT, TEXT } from "sequelize";
 import db from '.';
 import Category from "./category";
+import User from "./users.model";
 
 class Product extends Model {
   declare id: number;
@@ -74,6 +75,6 @@ Product.init({
 });
 
 Product.belongsTo(Category, { foreignKey: 'categoryId', as: 'category' });
-Product.belongsTo(Category, { foreignKey: 'userId', as: 'user' });
+Product.belongsTo(User, { foreignKey: 'userId', as: 'user' });
 
 export default Product;

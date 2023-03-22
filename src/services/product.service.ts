@@ -4,6 +4,7 @@ import CustomError from '../utils/CustomError';
 import JwtToken from '../utils/JwtToken';
 import fs from 'fs';
 import path from 'path';
+import User from '../database/models/users.model';
 
 class ProductService {
   public async getAll() {
@@ -21,7 +22,13 @@ class ProductService {
   }
 
   public async getById(productId: number) {
-    const product = await Product.findByPk(productId);
+    const product = await Product.findByPk(productId, {
+      include: {
+        model: User,
+        as: 'user',
+        attributes: { exclude: ['password'] }
+      },
+    });
     if(!product) throw new CustomError("Not found", 404);
     return product;
   }
