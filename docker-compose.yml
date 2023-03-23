@@ -2,7 +2,7 @@ version: '3'
 services:
   backend:
     image: node
-    build: ./
+    build: .
     container_name: hefestos_back
     working_dir: /app
     command: bash

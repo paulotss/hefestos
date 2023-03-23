@@ -14,4 +14,4 @@ RUN chown node:node /app
 
 USER node
 
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "db:reset"]

@@ -5,11 +5,11 @@ interface IProduct {
   title: string;
   description: string;
   cover: string | any;
-  amount: number;
-  width: number;
-  height: number;
-  depth: number;
-  weight: number;
+  amount?: number;
+  width?: number;
+  height?: number;
+  depth?: number;
+  weight?: number;
   price: number;
   categoryId: number;
   userId: number;

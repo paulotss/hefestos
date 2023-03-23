@@ -22,6 +22,16 @@ class CategoryController {
       this.next(error);
     }
   }
+
+  public async getById() {
+    const { id } = this.request.params;
+    try {
+      const result = await this.service.getById(Number(id));
+      this.resonse.status(200).json(result);
+    } catch (error) {
+      this.next(error);
+    }
+  }
 }
 
 export default CategoryController;

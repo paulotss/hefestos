@@ -1,11 +1,13 @@
 import { Model, INTEGER, STRING, FLOAT, TEXT } from "sequelize";
 import db from '.';
 import Category from "./category";
+import User from "./users.model";
 
 class Product extends Model {
   declare id: number;
   declare title: string;
   declare description: string;
+  declare cover: string;
   declare amount: number;
   declare width: number;
   declare height: number;
@@ -33,23 +35,23 @@ Product.init({
     type: STRING,
   },
   amount: {
-    allowNull: false,
+    allowNull: true,
     type: INTEGER,
   },
   width: {
-    allowNull: false,
+    allowNull: true,
     type: INTEGER,
   },
   height: {
-    allowNull: false,
+    allowNull: true,
     type: INTEGER,
   },
   depth: {
-    allowNull: false,
+    allowNull: true,
     type: INTEGER,
   },
   weight: {
-    allowNull: false,
+    allowNull: true,
     type: INTEGER,
   },
   price: {
@@ -73,6 +75,6 @@ Product.init({
 });
 
 Product.belongsTo(Category, { foreignKey: 'categoryId', as: 'category' });
-Product.belongsTo(Category, { foreignKey: 'userId', as: 'user' });
+Product.belongsTo(User, { foreignKey: 'userId', as: 'user' });
 
 export default Product;

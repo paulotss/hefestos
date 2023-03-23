@@ -2,6 +2,9 @@ import Product from '../database/models/product.model';
 import IProduct from '../interfaces/IProduct';
 import CustomError from '../utils/CustomError';
 import JwtToken from '../utils/JwtToken';
+import fs from 'fs';
+import path from 'path';
+import User from '../database/models/users.model';
 
 class ProductService {
   public async getAll() {
@@ -19,7 +22,13 @@ class ProductService {
   }
 
   public async getById(productId: number) {
-    const product = await Product.findByPk(productId);
+    const product = await Product.findByPk(productId, {
+      include: {
+        model: User,
+        as: 'user',
+        attributes: { exclude: ['password'] }
+      },
+    });
     if(!product) throw new CustomError("Not found", 404);
     return product;
   }
@@ -41,11 +50,11 @@ class ProductService {
       title: product.title,
       description: product.description,
       cover: product.cover,
-      amount: product.amount,
-      width: product.width,
-      height: product.height,
-      depth: product.depth,
-      weight: product.weight,
+      amount: product.amount || null,
+      width: product.width || null,
+      height: product.height || null,
+      depth: product.depth || null,
+      weight: product.weight || null,
       price: product.price,
       categoryId: product.categoryId,
       userId: product.userId
@@ -61,6 +70,8 @@ class ProductService {
   }
 
   public async remove(id: number) {
+    const product = await this.getById(id);
+    fs.unlinkSync(path.join(__dirname, `../media/${product.cover}`));
     const result = await Product.destroy({
       where: { id: id }
     });
