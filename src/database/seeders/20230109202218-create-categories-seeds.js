@@ -10,7 +10,7 @@ module.exports = {
       },
       {
         title: 'Livros',
-        image: 'services.png',
+        image: 'books.png',
       },
       {
         title: 'Casa',
