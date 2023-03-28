@@ -5,6 +5,7 @@ import { extname } from 'path'
 import UserController from '../controllers/user.controller';
 import AuthHandle from '../middlewares/AuthHandle';
 import CategoryController from '../controllers/category.controller';
+import AddressController from '../controllers/address.controller';
 
 const routes = Router();
 const storage = multer.diskStorage({
@@ -83,6 +84,11 @@ routes.get(
 routes.delete(
   '/product/:id',
   (req, res, next) => new ProductController(req, res, next).remove()
+);
+
+routes.post(
+  '/address',
+  (req, res, next) => new AddressController(req, res, next).create()
 );
 
 export default routes;
