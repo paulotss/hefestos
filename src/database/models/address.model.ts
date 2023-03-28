@@ -9,7 +9,9 @@ class Address extends Model {
   declare country: string;
   declare city: string;
   declare complement: string;
-  declare adress: string;
+  declare number: number;
+  declare street: string;
+  declare locality: string;
   declare userId: number;
 }
 
