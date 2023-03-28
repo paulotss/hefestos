@@ -30,7 +30,7 @@ class UserService {
     if (typeof jwt !== "string") {
       const { id } = jwt.data;
       const result = await User.findByPk(Number(id), {
-        include: { model: Address, as: "adress" },
+        include: { model: Address, as: "address" },
         attributes: { exclude: ['password'] }
       });
       return result;

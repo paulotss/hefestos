@@ -60,10 +60,10 @@ Address.init({
   }
 }, {
   sequelize: db,
-  modelName: 'adress',
+  modelName: 'address',
   timestamps: false,
   underscored: true,
-  tableName: 'adresses',
+  tableName: 'addresses',
 });
 
 Address.belongsTo(User, { foreignKey: 'userId', as: 'user' });
