@@ -3,7 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('adresses', {
+    await queryInterface.createTable('addresses', {
       id: {
         primaryKey: true,
         allowNull: false,
@@ -27,10 +27,18 @@ module.exports = {
         type: Sequelize.STRING,
       },
       complement: {
+        allowNull: true,
+        type: Sequelize.STRING,
+      },
+      number: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+      },
+      street: {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      adress: {
+      locality: {
         allowNull: false,
         type: Sequelize.STRING,
       },
@@ -48,6 +56,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('adresses');
+    await queryInterface.dropTable('addresses');
   }
 };

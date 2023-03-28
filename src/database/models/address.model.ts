@@ -2,7 +2,7 @@ import { Model, INTEGER, STRING } from "sequelize";
 import db from '.';
 import User from "./users.model";
 
-class Adress extends Model {
+class Address extends Model {
   declare id: number;
   declare cep: string;
   declare state: string;
@@ -13,7 +13,7 @@ class Adress extends Model {
   declare userId: number;
 }
 
-Adress.init({
+Address.init({
   id: {
     primaryKey: true,
     allowNull: false,
@@ -37,10 +37,18 @@ Adress.init({
     type: STRING,
   },
   complement: {
+    allowNull: true,
+    type: STRING,
+  },
+  number: {
+    allowNull: false,
+    type: INTEGER,
+  },
+  street: {
     allowNull: false,
     type: STRING,
   },
-  adress: {
+  locality: {
     allowNull: false,
     type: STRING,
   },
@@ -56,7 +64,7 @@ Adress.init({
   tableName: 'adresses',
 });
 
-Adress.belongsTo(User, { foreignKey: 'userId', as: 'user' });
-User.hasOne(Adress, { foreignKey: 'userId', as: 'adress' })
+Address.belongsTo(User, { foreignKey: 'userId', as: 'user' });
+User.hasOne(Address, { foreignKey: 'userId', as: 'address' })
 
-export default Adress;
+export default Address;

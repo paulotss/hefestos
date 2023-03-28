@@ -1,4 +1,4 @@
-import Adress from "../database/models/adress.model";
+import Address from "../database/models/address.model";
 import User from "../database/models/users.model";
 import ILogin from "../interfaces/ILogin";
 import IUser from "../interfaces/IUser";
@@ -30,7 +30,7 @@ class UserService {
     if (typeof jwt !== "string") {
       const { id } = jwt.data;
       const result = await User.findByPk(Number(id), {
-        include: { model: Adress, as: "adress" },
+        include: { model: Address, as: "adress" },
         attributes: { exclude: ['password'] }
       });
       return result;
