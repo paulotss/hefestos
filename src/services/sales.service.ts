@@ -35,14 +35,14 @@ class SalesService {
       items: [
         {
           name: product.title,
-          quantity: product.amount,
-          unit_amount: product.price
+          quantity: 1,
+          unit_amount: product.price * 100
         }
       ],
       qr_codes: [
           {
               amount: {
-                  value: product.price
+                  value: product.price * 100
               },
               expiration_date: "2023-09-09T20:15:59-03:00"
           }
