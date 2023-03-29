@@ -91,4 +91,9 @@ routes.post(
   (req, res, next) => new AddressController(req, res, next).create()
 );
 
+routes.put(
+  '/address/:id',
+  (req, res, next) => new AddressController(req, res, next).update()
+);
+
 export default routes;

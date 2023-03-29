@@ -24,6 +24,18 @@ class AddressController {
       this.next(error);
     }
   }
+
+  public async update() {
+    try {
+      const { id } = this.request.params;
+      const address: IAddress = this.request.body;
+      const result = await this.service.update(Number(id), address);
+      if (!result[0]) return this.response.sendStatus(204);
+      return this.response.status(201).json(result);
+    } catch (error) {
+      this.next(error);
+    }
+  }
 }
 
 export default AddressController;
