@@ -13,6 +13,7 @@ class Product extends Model {
   declare height: number;
   declare depth: number;
   declare weight: number;
+  declare price: number;
 }
 
 Product.init({

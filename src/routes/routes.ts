@@ -6,6 +6,7 @@ import UserController from '../controllers/user.controller';
 import AuthHandle from '../middlewares/AuthHandle';
 import CategoryController from '../controllers/category.controller';
 import AddressController from '../controllers/address.controller';
+import SalesController from '../controllers/sales.controller';
 
 const routes = Router();
 const storage = multer.diskStorage({
@@ -94,6 +95,11 @@ routes.post(
 routes.put(
   '/address/:id',
   (req, res, next) => new AddressController(req, res, next).update()
+);
+
+routes.get(
+  '/sales/genpix/:id',
+  (req, res, next) => new SalesController(req, res, next).generatePix()
 );
 
 export default routes;

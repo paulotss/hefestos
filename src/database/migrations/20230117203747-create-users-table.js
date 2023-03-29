@@ -22,6 +22,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
+      cpf: {
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
       password: {
         allowNull: false,
         type: Sequelize.STRING,
