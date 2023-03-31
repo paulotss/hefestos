@@ -107,4 +107,9 @@ routes.post(
   (req, res, next) => new SalesController(req, res, next).statusPix()
 );
 
+routes.get(
+  '/user/request/:id',
+  (req, res, next) => new UserController(req, res, next).getByIdWithProducts()
+);
+
 export default routes;
