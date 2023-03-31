@@ -77,6 +77,19 @@ class SalesService {
 
     return result.data;
   }
+
+  public async statusPix(orderId: string) {
+    const result = await axios.get(
+      `https://sandbox.api.pagseguro.com/orders/${orderId}`,
+      {
+        headers: { 
+          'Authorization': '63A51089E29049329DF87FC743DB1522',
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+    return result.data;
+  }
 }
 
 export default SalesService;

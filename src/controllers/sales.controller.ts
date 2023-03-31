@@ -25,6 +25,16 @@ class SalesController {
       this.next(error);
     }
   }
+
+  public async statusPix() {
+    try {
+      const { pixOrderId } = this.request.body;
+      const result = await this.service.statusPix(pixOrderId);
+      this.response.status(200).json(result);
+    } catch (error) {
+      this.next(error);
+    }
+  }
 }
 
 export default SalesController;

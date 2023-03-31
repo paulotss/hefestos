@@ -102,4 +102,9 @@ routes.get(
   (req, res, next) => new SalesController(req, res, next).generatePix()
 );
 
+routes.post(
+  '/sales/statuspix',
+  (req, res, next) => new SalesController(req, res, next).statusPix()
+);
+
 export default routes;
