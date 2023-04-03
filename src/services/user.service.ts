@@ -1,6 +1,7 @@
 import Address from "../database/models/address.model";
 import Phone from "../database/models/phone.model";
 import Product from "../database/models/product.model";
+import Request from "../database/models/requests";
 import User from "../database/models/users.model";
 import ILogin from "../interfaces/ILogin";
 import IUser from "../interfaces/IUser";
@@ -40,7 +41,9 @@ class UserService {
 
   public async getByIdWithProducts(id: number) {
     const user = await User.findByPk(id, {
-      include: Product
+      include: {
+        model: Request,
+      }
     });
     if (!user) throw new CustomError("Not Found", 404);
     return user;
