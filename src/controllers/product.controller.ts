@@ -54,7 +54,7 @@ class ProductController {
   public async create() {
     try {
       const product: IProduct = this.request.body;
-      product.cover = this.request.file?.filename;
+      product.cover = this.request.file?.originalname;
       const result = await this.service.create(product);
       this.response.status(201).json(result);
     } catch (error) {

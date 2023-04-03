@@ -5,17 +5,19 @@ import { extname } from 'path'
 import UserController from '../controllers/user.controller';
 import AuthHandle from '../middlewares/AuthHandle';
 import CategoryController from '../controllers/category.controller';
+import MulterStorage from '../utils/MulterStorage';
 
 const routes = Router();
-const storage = multer.diskStorage({
-  destination: function(_req, _res, cb) {
-    cb(null, 'src/media')
-  },
-  filename: function(_req, file, cb) {
-    cb(null, Date.now() + extname(file.originalname))
-  }
-})
-const upload = multer({storage: storage});
+// const storage = multer.diskStorage({
+//   destination: function(_req, _res, cb) {
+//     cb(null, 'src/media')
+//   },
+//   filename: function(_req, file, cb) {
+//     cb(null, Date.now() + extname(file.originalname))
+//   }
+// })
+// const upload = multer({storage: storage});
+const multerStorage = new MulterStorage("s3");
 
 routes.get(
   '/products',
@@ -40,7 +42,7 @@ routes.get(
 
 routes.post(
   '/product',
-  upload.single('file'),
+  multer(multerStorage.multerConfig()).single('file'),
   (req, res, next) => new ProductController(req, res, next).create()
 );
 
