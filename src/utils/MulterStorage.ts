@@ -1,4 +1,4 @@
-import multer from 'multer';
+import multer, { Multer } from 'multer';
 import multerS3 from 'multer-s3';
 import { extname } from 'path';
 import { S3Client } from '@aws-sdk/client-s3';
@@ -33,9 +33,11 @@ class MulterStorage {
       }),
       bucket: process.env.AWS_S3_BUCKET || '',
       contentType: multerS3.AUTO_CONTENT_TYPE,
-      acl: "private",
+      acl: "public-read",
       key: (_req, file, cb) => {
-        cb(null, Date.now() + extname(file.originalname))
+        const key = Date.now() + extname(file.originalname);
+        file.filename = key;
+        cb(null, key);
       },
     });
     return storage;

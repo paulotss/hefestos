@@ -54,7 +54,7 @@ class ProductController {
   public async create() {
     try {
       const product: IProduct = this.request.body;
-      product.cover = this.request.file?.originalname;
+      product.cover = this.request.file?.filename;
       const result = await this.service.create(product);
       this.response.status(201).json(result);
     } catch (error) {
@@ -76,8 +76,8 @@ class ProductController {
   public async remove() {
     try {
       const { id } = this.request.params;
-      await this.service.remove(Number(id));
-      this.response.sendStatus(200);
+      const result = await this.service.remove(Number(id));
+      this.response.status(200).json(result);
     } catch (error) {
       this.next(error);
     }
