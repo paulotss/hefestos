@@ -14,6 +14,15 @@ class RequestService {
     if (!result) throw new CustomError("Not Found", 404);
     return result;
   }
+
+  public async create(userId: number, productId: number) {
+    const result = await Request.create({
+      userId: userId,
+      productId: productId,
+      status: "paid"
+    });
+    return result;
+  }
 }
 
 export default RequestService;

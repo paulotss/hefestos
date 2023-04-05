@@ -23,6 +23,16 @@ class RequestController {
       this.next(error);
     }
   }
+
+  public async create() {
+    const {userId, productId} = this.request.body;
+    try {
+      const result = await this.service.create(Number(userId), Number(productId));
+      this.response.status(201).json(result);
+    } catch (error) {
+      this.next(error);
+    }
+  }
 }
 
 export default RequestController;

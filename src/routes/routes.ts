@@ -118,4 +118,9 @@ routes.get(
   (req, res, next) => new RequestController(req, res, next).getByUserId()
 );
 
+routes.post(
+  '/request',
+  (req, res, next) => new RequestController(req, res, next).create()
+);
+
 export default routes;
