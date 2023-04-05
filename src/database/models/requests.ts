@@ -4,12 +4,19 @@ import Product from './product.model';
 import User from './users.model';
 
 class Request extends Model {
+  declare id: number;
   declare userId: number;
   declare productId: number;
   declare status: string;
 }
 
 Request.init({
+  id: {
+    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true,
+    type: INTEGER
+  },
   userId: {
     allowNull: false,
     type: INTEGER
