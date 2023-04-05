@@ -44,7 +44,7 @@ Request.belongsTo(User,
 
 Request.belongsTo(Product,
   {
-    foreignKey: 'userId',
+    foreignKey: 'productId',
     as: 'products',
   });
 
