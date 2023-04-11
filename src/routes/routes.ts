@@ -127,4 +127,9 @@ routes.get(
   (req, res, next) => new ProductController(req, res, next).getProductsByUserWithSales()
 );
 
+routes.get(
+  '/sale/product/user/:id',
+  (req, res, next) => new SalesController(req, res, next).getByProductUserId()
+);
+
 export default routes;

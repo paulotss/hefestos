@@ -24,6 +24,16 @@ class SalesController {
     }
   }
 
+  public async getByProductUserId() {
+    const { id } = this.request.params;
+    try {
+      const result = await this.service.getByProductUserId(Number(id));
+      this.response.status(200).json(result);
+    } catch (error) {
+      this.next(error);
+    }
+  }
+
   public async create() {
     const {userId, productId} = this.request.body;
     try {

@@ -27,6 +27,18 @@ class SalesService {
     return result;
   }
 
+  public async getByProductUserId(id: number) {
+    const result = await Sale.findAll({
+      include: {
+        model: Product,
+        as: 'products',
+        where: { userId: id }
+      }
+    });
+    if (!result) throw new CustomError("Not Found", 404);
+    return result;
+  }
+
   public async create(userId: number, productId: number) {
     const result = await Sale.create({
       userId: userId,
