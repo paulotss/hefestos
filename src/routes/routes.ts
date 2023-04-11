@@ -7,7 +7,6 @@ import AuthHandle from '../middlewares/AuthHandle';
 import CategoryController from '../controllers/category.controller';
 import AddressController from '../controllers/address.controller';
 import SalesController from '../controllers/sales.controller';
-import RequestController from '../controllers/request.controller';
 
 const routes = Router();
 const storage = multer.diskStorage({
@@ -114,13 +113,18 @@ routes.get(
 );
 
 routes.get(
-  '/request/:id',
-  (req, res, next) => new RequestController(req, res, next).getByUserId()
+  '/sale/:id',
+  (req, res, next) => new SalesController(req, res, next).getByUserId()
 );
 
 routes.post(
-  '/request',
-  (req, res, next) => new RequestController(req, res, next).create()
+  '/sales',
+  (req, res, next) => new SalesController(req, res, next).create()
+);
+
+routes.get(
+  '/product/sales/:id',
+  (req, res, next) => new ProductController(req, res, next).getProductsByUserWithSales()
 );
 
 export default routes;

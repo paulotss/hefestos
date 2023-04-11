@@ -1,10 +1,11 @@
 import Product from '../database/models/product.model';
 import IProduct from '../interfaces/IProduct';
+import User from '../database/models/users.model';
 import CustomError from '../utils/CustomError';
 import JwtToken from '../utils/JwtToken';
 import fs from 'fs';
 import path from 'path';
-import User from '../database/models/users.model';
+import Sale from '../database/models/sales.model';
 
 class ProductService {
   public async getAll() {
@@ -43,6 +44,18 @@ class ProductService {
       return result;
     }
     throw new CustomError("Invalid token", 403);
+  }
+
+  public async getProductsByUserWithSales(id: number) {
+    const result = await Product.findAll({
+      where: { userId: id },
+      include: {
+        model: Sale,
+        as: 'sales'
+      }
+    });
+    if (!result) throw new CustomError("Not Found", 404);
+    return result;
   }
 
   public async create(product: IProduct) {

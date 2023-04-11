@@ -2,13 +2,38 @@ import AddressService from "./address.service";
 import PhoneService from "./phone.service";
 import ProductService from "./product.service";
 import UserService from "./user.service";
+import Product from "../database/models/product.model";
+import Sale from "../database/models/sales.model";
 import axios from "axios";
+import CustomError from "../utils/CustomError";
+
 
 class SalesService {
   private baseUrl: string;
 
   constructor() {
     this.baseUrl = process.env.BASE_URL || 'http://localhost:3001';
+  }
+
+  public async getByUserId(id: number) {
+    const result = await Sale.findAll({
+      where: { userId: id },
+      include: {
+        model: Product,
+        as: 'products'
+      }
+    });
+    if (!result) throw new CustomError("Not Found", 404);
+    return result;
+  }
+
+  public async create(userId: number, productId: number) {
+    const result = await Sale.create({
+      userId: userId,
+      productId: productId,
+      status: "paid"
+    });
+    return result;
   }
 
   public async pixGenerate(productId: number, token: string) {

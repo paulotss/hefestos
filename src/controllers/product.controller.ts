@@ -51,6 +51,16 @@ class ProductController {
     }
   }
 
+  public async getProductsByUserWithSales() {
+    const { id } = this.request.params;
+    try {
+      const products = await this.service.getProductsByUserWithSales(Number(id));
+      this.response.status(200).json(products);
+    } catch (error) {
+      this.next(error);
+    }
+  }
+
   public async create() {
     try {
       const product: IProduct = this.request.body;

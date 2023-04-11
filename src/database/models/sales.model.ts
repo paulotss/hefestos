@@ -3,14 +3,14 @@ import db from '.';
 import Product from './product.model';
 import User from './users.model';
 
-class Request extends Model {
+class Sale extends Model {
   declare id: number;
   declare userId: number;
   declare productId: number;
   declare status: string;
 }
 
-Request.init({
+Sale.init({
   id: {
     allowNull: false,
     primaryKey: true,
@@ -33,24 +33,24 @@ Request.init({
   sequelize: db,
   timestamps: false,
   underscored: true,
-  tableName: 'requests'
+  tableName: 'sales'
 });
 
-Request.belongsTo(User, 
+Product.hasMany(Sale, {
+  foreignKey: 'productId',
+  as: 'sales'
+})
+
+Sale.belongsTo(User, 
   {
     foreignKey: 'userId',
     as: 'users',
   });
 
-Request.belongsTo(Product,
+Sale.belongsTo(Product,
   {
     foreignKey: 'productId',
     as: 'products',
   });
 
-// Request.belongsTo(Product);
-// Request.belongsTo(User);
-// User.hasMany(Request);
-// Product.hasMany(Request);
-
-export default Request;
+export default Sale;
