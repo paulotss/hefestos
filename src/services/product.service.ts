@@ -6,7 +6,6 @@ import JwtToken from '../utils/JwtToken';
 import fs from 'fs';
 import path from 'path';
 import Sale from '../database/models/sales.model';
-import User from '../database/models/users.model';
 //import { S3Client, DeleteObjectCommand } from '@aws-sdk/client-s3';
 import aws from 'aws-sdk';
 
