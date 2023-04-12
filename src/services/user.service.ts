@@ -1,4 +1,5 @@
-import Adress from "../database/models/adress.model";
+import Address from "../database/models/address.model";
+import Phone from "../database/models/phone.model";
 import User from "../database/models/users.model";
 import ILogin from "../interfaces/ILogin";
 import IUser from "../interfaces/IUser";
@@ -25,14 +26,29 @@ class UserService {
     return result;
   }
 
+  public async getById(id: number) {
+    const user = await User.findByPk(id, {
+      include: {
+        model: Address,
+        as: 'address'
+      }
+    });
+    if (!user) throw new CustomError("Not Found!", 404);
+    return user;
+  }
+
   public async getUserById(token: string) {
     const jwt = JwtToken.verifyToken(token);
     if (typeof jwt !== "string") {
       const { id } = jwt.data;
       const result = await User.findByPk(Number(id), {
-        include: { model: Adress, as: "adress" },
+        include: [
+          { model: Address, as: "address" },
+          { model: Phone, as: "phones" }
+        ],
         attributes: { exclude: ['password'] }
       });
+      if (!result) throw new CustomError("Not Found", 404);
       return result;
     }
     throw new CustomError("Invalid token", 403);

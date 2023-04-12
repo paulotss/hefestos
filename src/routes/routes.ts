@@ -5,7 +5,6 @@ import { extname } from 'path'
 import UserController from '../controllers/user.controller';
 import AuthHandle from '../middlewares/AuthHandle';
 import CategoryController from '../controllers/category.controller';
-import MulterStorage from '../utils/MulterStorage';
 
 const routes = Router();
 // const storage = multer.diskStorage({
@@ -85,6 +84,26 @@ routes.get(
 routes.delete(
   '/product/:id',
   (req, res, next) => new ProductController(req, res, next).remove()
+);
+
+routes.post(
+  '/address',
+  (req, res, next) => new AddressController(req, res, next).create()
+);
+
+routes.put(
+  '/address/:id',
+  (req, res, next) => new AddressController(req, res, next).update()
+);
+
+routes.get(
+  '/sales/genpix/:id',
+  (req, res, next) => new SalesController(req, res, next).generatePix()
+);
+
+routes.post(
+  '/sales/statuspix',
+  (req, res, next) => new SalesController(req, res, next).statusPix()
 );
 
 export default routes;

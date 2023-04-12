@@ -7,6 +7,7 @@ class User extends Model {
   declare firstName: string;
   declare lastName: string;
   declare email: string;
+  declare cpf: string;
   declare password: string;
   declare cellPhone: string;
   declare whatsapp: string;
@@ -28,6 +29,10 @@ User.init({
     type: STRING,
   },
   email: {
+    allowNull: false,
+    type: STRING,
+  },
+  cpf: {
     allowNull: false,
     type: STRING,
   },
