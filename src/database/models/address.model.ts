@@ -66,7 +66,7 @@ Address.init({
   tableName: 'addresses',
 });
 
+User.hasOne(Address, { foreignKey: 'userId', as: 'address' });
 Address.belongsTo(User, { foreignKey: 'userId', as: 'user' });
-User.hasOne(Address, { foreignKey: 'userId', as: 'address' })
 
 export default Address;

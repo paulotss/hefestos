@@ -36,10 +36,15 @@ Sale.init({
   tableName: 'sales'
 });
 
+User.hasMany(Sale, {
+  foreignKey: 'userId',
+  as: 'sales'
+});
+
 Product.hasMany(Sale, {
   foreignKey: 'productId',
   as: 'sales'
-})
+});
 
 Sale.belongsTo(User, 
   {
