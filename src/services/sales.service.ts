@@ -2,13 +2,82 @@ import AddressService from "./address.service";
 import PhoneService from "./phone.service";
 import ProductService from "./product.service";
 import UserService from "./user.service";
+import Product from "../database/models/product.model";
+import Sale from "../database/models/sales.model";
 import axios from "axios";
+import CustomError from "../utils/CustomError";
+import User from "../database/models/users.model";
+import Address from "../database/models/address.model";
+
 
 class SalesService {
   private baseUrl: string;
 
   constructor() {
     this.baseUrl = process.env.BASE_URL || 'http://localhost:3001';
+  }
+
+  public async getByUserId(id: number) {
+    const result = await Sale.findAll({
+      where: { userId: id },
+      include: {
+        model: Product,
+        as: 'products'
+      }
+    });
+    if (!result) throw new CustomError("Not Found", 404);
+    return result;
+  }
+
+  public async getByProductUserId(id: number) {
+    const result = await Sale.findAll({
+      include: [
+        {
+          model: Product,
+          as: 'products',
+          where: { userId: id }
+        },
+        {
+          model: User,
+          as: 'users',
+          where: { id: id }
+        }
+      ]
+    });
+    if (!result) throw new CustomError("Not Found", 404);
+    return result;
+  }
+
+  public async getByProductId(id: number) {
+    const sale = await Sale.findOne({
+      where: { productId: id },
+      include: [
+        {
+          model: Product,
+          as: 'products'
+        },
+        {
+          model: User,
+          as: 'users',
+        }
+      ]
+    });
+    if (!sale) new CustomError("Not Found", 404);
+    const address = await Address.findOne({
+      where: { userId: sale?.userId }
+    });
+    if (!address) new CustomError("Not Found", 404);
+    const result = { ...sale?.dataValues, ...address?.dataValues };
+    return result;
+  }
+
+  public async create(userId: number, productId: number) {
+    const result = await Sale.create({
+      userId: userId,
+      productId: productId,
+      status: "paid"
+    });
+    return result;
   }
 
   public async pixGenerate(productId: number, token: string) {
