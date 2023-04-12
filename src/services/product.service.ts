@@ -6,6 +6,9 @@ import JwtToken from '../utils/JwtToken';
 import fs from 'fs';
 import path from 'path';
 import Sale from '../database/models/sales.model';
+import User from '../database/models/users.model';
+//import { S3Client, DeleteObjectCommand } from '@aws-sdk/client-s3';
+import aws from 'aws-sdk';
 
 class ProductService {
   public async getAll() {
@@ -84,7 +87,20 @@ class ProductService {
 
   public async remove(id: number) {
     const product = await this.getById(id);
-    fs.unlinkSync(path.join(__dirname, `../media/${product.cover}`));
+    const s3 = new aws.S3();
+    s3.config.update({
+      region: process.env.AWS_REGION,
+      credentials: {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID || '',
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || ''
+      }
+    });
+
+    await s3.deleteObject({
+      Bucket: process.env.AWS_S3_BUCKET || '',
+      Key: product.cover
+    }).promise();
+
     const result = await Product.destroy({
       where: { id: id }
     });
