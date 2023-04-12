@@ -107,4 +107,34 @@ routes.post(
   (req, res, next) => new SalesController(req, res, next).statusPix()
 );
 
+routes.get(
+  '/user/request/:id',
+  (req, res, next) => new UserController(req, res, next).getByIdWithProducts()
+);
+
+routes.get(
+  '/sale/:id',
+  (req, res, next) => new SalesController(req, res, next).getByUserId()
+);
+
+routes.post(
+  '/sales',
+  (req, res, next) => new SalesController(req, res, next).create()
+);
+
+routes.get(
+  '/product/sales/:id',
+  (req, res, next) => new ProductController(req, res, next).getProductsByUserWithSales()
+);
+
+routes.get(
+  '/sale/product/user/:id',
+  (req, res, next) => new SalesController(req, res, next).getByProductUserId()
+);
+
+routes.get(
+  '/sale/product/:id',
+  (req, res, next) => new SalesController(req, res, next).getByProductId()
+);
+
 export default routes;

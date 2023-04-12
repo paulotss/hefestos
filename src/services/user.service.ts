@@ -1,5 +1,6 @@
 import Address from "../database/models/address.model";
 import Phone from "../database/models/phone.model";
+import Sale from "../database/models/sales.model";
 import User from "../database/models/users.model";
 import ILogin from "../interfaces/ILogin";
 import IUser from "../interfaces/IUser";
@@ -34,6 +35,16 @@ class UserService {
       }
     });
     if (!user) throw new CustomError("Not Found!", 404);
+    return user;
+  }
+
+  public async getByIdWithProducts(id: number) {
+    const user = await User.findByPk(id, {
+      include: {
+        model: Sale,
+      }
+    });
+    if (!user) throw new CustomError("Not Found", 404);
     return user;
   }
 

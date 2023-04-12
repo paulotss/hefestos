@@ -45,6 +45,16 @@ class UserController {
       this.next(error);
     }
   }
+
+  public async getByIdWithProducts() {
+    try {
+      const { id } = this.request.params;
+      const result = await this.service.getByIdWithProducts(Number(id));
+      this.response.status(200).json(result);
+    } catch (error) {
+      this.next(error);
+    }
+  }
 }
 
 export default UserController;

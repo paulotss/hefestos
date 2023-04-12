@@ -14,6 +14,46 @@ class SalesController {
     this.service = new SalesService();
   }
 
+  public async getByUserId() {
+    const { id } = this.request.params;
+    try {
+      const result = await this.service.getByUserId(Number(id));
+      this.response.status(200).json(result);
+    } catch (error) {
+      this.next(error);
+    }
+  }
+
+  public async getByProductUserId() {
+    const { id } = this.request.params;
+    try {
+      const result = await this.service.getByProductUserId(Number(id));
+      this.response.status(200).json(result);
+    } catch (error) {
+      this.next(error);
+    }
+  }
+
+  public async getByProductId() {
+    const { id } = this.request.params;
+    try {
+      const result = await this.service.getByProductId(Number(id));
+      this.response.status(200).json(result);
+    } catch (error) {
+      this.next(error);
+    }
+  }
+
+  public async create() {
+    const {userId, productId} = this.request.body;
+    try {
+      const result = await this.service.create(Number(userId), Number(productId));
+      this.response.status(201).json(result);
+    } catch (error) {
+      this.next(error);
+    }
+  }
+
   public async generatePix() {
     try {
       const { id } = this.request.params;
