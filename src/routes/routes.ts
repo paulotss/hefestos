@@ -5,6 +5,9 @@ import { extname } from 'path'
 import UserController from '../controllers/user.controller';
 import AuthHandle from '../middlewares/AuthHandle';
 import CategoryController from '../controllers/category.controller';
+import AddressController from '../controllers/address.controller';
+import SalesController from '../controllers/sales.controller';
+import MulterStorage from '../utils/MulterStorage';
 
 const routes = Router();
 // const storage = multer.diskStorage({
