@@ -8,8 +8,6 @@ class User extends Model {
   declare email: string;
   declare cpf: string;
   declare password: string;
-  declare cellPhone: string;
-  declare whatsapp: string;
 }
 
 User.init({
@@ -36,14 +34,6 @@ User.init({
     type: STRING,
   },
   password: {
-    allowNull: false,
-    type: STRING,
-  },
-  cellPhone: {
-    allowNull: false,
-    type: STRING,
-  },
-  whatsapp: {
     allowNull: false,
     type: STRING,
   },

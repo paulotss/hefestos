@@ -1,11 +1,12 @@
 interface IUser {
   id?: number;
-  first_name: string;
-  last_name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
-  cellPhone: string;
-  whatsapp: string;
+  cpf: string;
+  area: string;
+  number: string;
 }
 
 export default IUser;
