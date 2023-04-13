@@ -30,12 +30,22 @@ class UserService {
       password: user.password,
       cpf: user.cpf
     });
-    const phone = await Phone.create({
+    await Phone.create({
       area: user.area,
-      number: user.number,
+      number: user.cellPhone,
       type: "MOBILE",
       userId: newUser.id
-    })
+    });
+    await Address.create({
+      cep: user.cep,
+      state: user.state,
+      country: "BRA",
+      city: user.city,
+      number: user.number,
+      street: user.street,
+      locality: user.locality,
+      userId: newUser.id
+    });
     return newUser;
   }
 
