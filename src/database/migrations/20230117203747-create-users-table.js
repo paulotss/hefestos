@@ -30,14 +30,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      cell_phone: {
-        allowNull: false,
-        type: Sequelize.STRING,
-      },
-      whatsapp: {
-        allowNull: false,
-        type: Sequelize.STRING,
-      },
     });
   },
 

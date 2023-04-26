@@ -41,7 +41,7 @@ Phone.init({
   tableName: 'phones'
 });
 
+User.hasOne(Phone, { foreignKey: 'userId', as: 'phones' });
 Phone.belongsTo(User, { foreignKey: 'userId', as: 'user' });
-User.hasOne(Phone, { foreignKey: 'userId', as: 'phones' })
 
 export default Phone;

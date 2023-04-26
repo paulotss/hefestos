@@ -23,8 +23,30 @@ class UserService {
       where: { email: user.email }
     });
     if (exist) throw new CustomError("Email already exists", 409);
-    const result = await User.create({ ...user });
-    return result;
+    const newUser = await User.create({
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      password: user.password,
+      cpf: user.cpf
+    });
+    await Phone.create({
+      area: user.area,
+      number: user.cellPhone,
+      type: "MOBILE",
+      userId: newUser.id
+    });
+    await Address.create({
+      cep: user.cep,
+      state: user.state,
+      country: "BRA",
+      city: user.city,
+      number: user.number,
+      street: user.street,
+      locality: user.locality,
+      userId: newUser.id
+    });
+    return newUser;
   }
 
   public async getById(id: number) {
