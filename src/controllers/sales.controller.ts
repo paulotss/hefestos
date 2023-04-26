@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import SalesService from '../services/sales.service';
+import JwtToken from '../utils/JwtToken';
 
 class SalesController {
   private request: Request;
@@ -15,7 +16,9 @@ class SalesController {
   }
 
   public async getByUserId() {
-    const { id } = this.request.params;
+    const { authorization } = this.request.headers;
+    if (!authorization) return this.response.sendStatus(403);
+    const id = JwtToken.getJwtId(authorization);
     try {
       const result = await this.service.getByUserId(Number(id));
       this.response.status(200).json(result);
@@ -25,9 +28,11 @@ class SalesController {
   }
 
   public async getByProductUserId() {
-    const { id } = this.request.params;
+    const { authorization } = this.request.headers;
+    if (!authorization) return this.response.sendStatus(403);
+    const id = JwtToken.getJwtId(authorization);
     try {
-      const result = await this.service.getByProductUserId(Number(id));
+      const result = await this.service.getByProductUserId(id);
       this.response.status(200).json(result);
     } catch (error) {
       this.next(error);

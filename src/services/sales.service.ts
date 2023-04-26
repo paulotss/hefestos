@@ -8,7 +8,7 @@ import axios from "axios";
 import CustomError from "../utils/CustomError";
 import User from "../database/models/users.model";
 import Address from "../database/models/address.model";
-
+import JwtToken from "../utils/JwtToken";
 
 class SalesService {
   private baseUrl: string;
@@ -81,8 +81,9 @@ class SalesService {
   }
 
   public async pixGenerate(productId: number, token: string) {
+    const id = JwtToken.getJwtId(token);
     const product = await new ProductService().getById(productId);
-    const user = await new UserService().getUserById(token);
+    const user = await new UserService().getUserById(id);
     const address = await new AddressService().getByUserId(user.id);
     const phone = await new PhoneService().getByUserId(user.id);
 

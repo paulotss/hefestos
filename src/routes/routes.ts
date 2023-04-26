@@ -115,7 +115,7 @@ routes.get(
 );
 
 routes.get(
-  '/sale/:id',
+  '/sales',
   (req, res, next) => new SalesController(req, res, next).getByUserId()
 );
 
@@ -130,7 +130,7 @@ routes.get(
 );
 
 routes.get(
-  '/sale/product/user/:id',
+  '/sale/product/user',
   (req, res, next) => new SalesController(req, res, next).getByProductUserId()
 );
 

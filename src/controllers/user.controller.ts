@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import IUser from '../interfaces/IUser';
 import UserService from '../services/user.service';
+import JwtToken from '../utils/JwtToken';
 
 class UserController {
   private request: Request;
@@ -39,7 +40,8 @@ class UserController {
     const { authorization } = this.request.headers
     if (!authorization) return this.response.sendStatus(403);
     try {
-      const result = await this.service.getUserById(authorization);
+      const id = JwtToken.getJwtId(authorization);
+      const result = await this.service.getUserById(id);
       return this.response.status(200).json(result);
     } catch (error) {
       this.next(error);
