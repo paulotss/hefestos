@@ -40,7 +40,6 @@ class SalesService {
         {
           model: User,
           as: 'users',
-          where: { id: id }
         }
       ]
     });
