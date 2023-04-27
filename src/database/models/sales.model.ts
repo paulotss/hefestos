@@ -31,7 +31,6 @@ Sale.init({
   },
 }, {
   sequelize: db,
-  timestamps: false,
   underscored: true,
   tableName: 'sales'
 });
