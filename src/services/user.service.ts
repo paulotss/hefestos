@@ -70,21 +70,16 @@ class UserService {
     return user;
   }
 
-  public async getUserById(token: string) {
-    const jwt = JwtToken.verifyToken(token);
-    if (typeof jwt !== "string") {
-      const { id } = jwt.data;
-      const result = await User.findByPk(Number(id), {
-        include: [
-          { model: Address, as: "address" },
-          { model: Phone, as: "phones" }
-        ],
+  public async getUserById(id: number) {
+    const result = await User.findByPk(Number(id), {
+      include: [
+        { model: Address, as: "address" },
+        { model: Phone, as: "phones" }
+      ],
         attributes: { exclude: ['password'] }
-      });
-      if (!result) throw new CustomError("Not Found", 404);
-      return result;
-    }
-    throw new CustomError("Invalid token", 403);
+    });
+    if (!result) throw new CustomError("Not Found", 404);
+    return result;
   }
 }
 

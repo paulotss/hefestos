@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import IProduct from '../interfaces/IProduct';
 import ProductService from '../services/product.service';
+import JwtToken from '../utils/JwtToken';
 
 class ProductController {
   private request: Request;
@@ -64,6 +65,9 @@ class ProductController {
   public async create() {
     try {
       const product: IProduct = this.request.body;
+      const { authorization } = this.request.headers;
+      if (!authorization) return this.response.sendStatus(403);
+      product.userId = JwtToken.getJwtId(authorization);
       product.cover = this.request.file?.filename;
       const result = await this.service.create(product);
       this.response.status(201).json(result);

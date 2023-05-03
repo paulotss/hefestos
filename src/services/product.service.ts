@@ -86,6 +86,11 @@ class ProductService {
 
   public async remove(id: number) {
     const product = await this.getById(id);
+    
+    const result = await Product.destroy({
+      where: { id: id }
+    });
+
     const s3 = new aws.S3();
     s3.config.update({
       region: process.env.AWS_REGION,
@@ -100,9 +105,6 @@ class ProductService {
       Key: product.cover
     }).promise();
 
-    const result = await Product.destroy({
-      where: { id: id }
-    });
     return result;
   }
 }
