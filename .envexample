@@ -1,1 +1,15 @@
-MYSQL_ROOT_PASSWORD=123456
+API_PORT=3001
+DB_USER='root'
+DB_PASS='shhhhhhhhh'
+DB_NAME='hefestos'
+DB_HOST='hefestos_db'
+DB_PORT=3306
+JWT_SECRET='shhhhhhhhh'
+BASE_URL='http://localhost:3001'
+
+AWS_ACCESS_KEY_ID='shhhhhhhhh'
+AWS_SECRET_ACCESS_KEY='shhhhhhhhh'
+AWS_REGION='shhhhhhhhh'
+AWS_S3_BUCKET='shhhhhhhhh'
+
+STORAGE_TYPE=local
