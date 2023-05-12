@@ -12,9 +12,11 @@ import JwtToken from "../utils/JwtToken";
 
 class SalesService {
   private baseUrl: string;
+  private pagSeguroToken: string | undefined;
 
   constructor() {
     this.baseUrl = process.env.BASE_URL || 'http://localhost:3001';
+    this.pagSeguroToken = process.env.PAGSEGURO_TOKEN;
   }
 
   public async getByUserId(id: number) {
@@ -134,11 +136,12 @@ class SalesService {
     }
 
     const result = await axios.post(
-      'https://sandbox.api.pagseguro.com/orders',
+      'https://api.pagseguro.com/orders',
       data,
       {
-        headers: { 
-          'Authorization': '63A51089E29049329DF87FC743DB1522',
+        headers: {
+          // 'Authorization': '63A51089E29049329DF87FC743DB1522',
+          'Authorization': this.pagSeguroToken,
           'Content-Type': 'application/json'
         }
       }
@@ -149,10 +152,10 @@ class SalesService {
 
   public async statusPix(orderId: string) {
     const result = await axios.get(
-      `https://sandbox.api.pagseguro.com/orders/${orderId}`,
+      `https://api.pagseguro.com/orders/${orderId}`,
       {
         headers: { 
-          'Authorization': '63A51089E29049329DF87FC743DB1522',
+          'Authorization': this.pagSeguroToken,
           'Content-Type': 'application/json'
         }
       }
