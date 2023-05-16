@@ -1,12 +1,12 @@
 import { Router } from 'express';
 import ProductController from '../controllers/product.controller';
 import multer from 'multer';
-import { extname } from 'path'
 import UserController from '../controllers/user.controller';
 import AuthHandle from '../middlewares/AuthHandle';
 import CategoryController from '../controllers/category.controller';
 import AddressController from '../controllers/address.controller';
 import SalesController from '../controllers/sales.controller';
+import ShippingController from '../controllers/shipping.controller';
 import MulterStorage from '../utils/MulterStorage';
 
 const routes = Router();
@@ -99,8 +99,8 @@ routes.put(
   (req, res, next) => new AddressController(req, res, next).update()
 );
 
-routes.get(
-  '/sales/genpix/:id',
+routes.post(
+  '/sales/genpix',
   (req, res, next) => new SalesController(req, res, next).generatePix()
 );
 
@@ -137,6 +137,11 @@ routes.get(
 routes.get(
   '/sale/product/:id',
   (req, res, next) => new SalesController(req, res, next).getByProductId()
+);
+
+routes.get(
+  '/shippings',
+  (req, res, next) => new ShippingController(req, res, next).getAll()
 );
 
 export default routes;

@@ -2,12 +2,14 @@ import { Model, STRING, INTEGER } from 'sequelize';
 import db from '.';
 import Product from './product.model';
 import User from './users.model';
+import Shipping from './shippgins.model';
 
 class Sale extends Model {
   declare id: number;
   declare userId: number;
   declare productId: number;
   declare status: string;
+  declare shippingId: number;
 }
 
 Sale.init({
@@ -29,6 +31,10 @@ Sale.init({
     allowNull: false,
     type: STRING
   },
+  shippingId: {
+    allowNull: false,
+    type: INTEGER
+  }
 }, {
   sequelize: db,
   underscored: true,
@@ -45,16 +51,24 @@ Product.hasMany(Sale, {
   as: 'sales'
 });
 
-Sale.belongsTo(User, 
-  {
+Shipping.hasMany(Sale, {
+  foreignKey: 'shippingId',
+  as: 'sales'
+});
+
+Sale.belongsTo(User, {
     foreignKey: 'userId',
     as: 'users',
-  });
+});
 
-Sale.belongsTo(Product,
-  {
+Sale.belongsTo(Product, {
     foreignKey: 'productId',
     as: 'products',
-  });
+});
+
+Sale.belongsTo(Shipping, {
+  foreignKey: 'shippingId',
+  as: 'shipping',
+});
 
 export default Sale;

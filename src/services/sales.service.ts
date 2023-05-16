@@ -9,6 +9,7 @@ import CustomError from "../utils/CustomError";
 import User from "../database/models/users.model";
 import Address from "../database/models/address.model";
 import JwtToken from "../utils/JwtToken";
+import Shipping from "../database/models/shippgins.model";
 
 class SalesService {
   private baseUrl: string;
@@ -42,6 +43,10 @@ class SalesService {
         {
           model: User,
           as: 'users',
+        },
+        {
+          model: Shipping,
+          as: 'shipping'
         }
       ]
     });
@@ -59,7 +64,11 @@ class SalesService {
         },
         {
           model: User,
-          as: 'users',
+          as: 'users'
+        },
+        {
+          model: Shipping,
+          as: 'shipping'
         }
       ]
     });
@@ -81,7 +90,7 @@ class SalesService {
     return result;
   }
 
-  public async pixGenerate(productId: number, token: string) {
+  public async pixGenerate(productId: number, token: string, priceShipping: number) {
     const id = JwtToken.getJwtId(token);
     const product = await new ProductService().getById(productId);
     const user = await new UserService().getUserById(id);
@@ -107,13 +116,13 @@ class SalesService {
         {
           name: product.title,
           quantity: 1,
-          unit_amount: product.price * 100
+          unit_amount: (priceShipping + product.price) * 100
         }
       ],
       qr_codes: [
           {
               amount: {
-                  value: product.price * 100
+                  value: (priceShipping + product.price) * 100
               },
               expiration_date: "2023-09-09T20:15:59-03:00"
           }
@@ -154,7 +163,8 @@ class SalesService {
     const result = await axios.get(
       `https://api.pagseguro.com/orders/${orderId}`,
       {
-        headers: { 
+        headers: {
+          // 'Authorization': '63A51089E29049329DF87FC743DB1522',
           'Authorization': this.pagSeguroToken,
           'Content-Type': 'application/json'
         }
