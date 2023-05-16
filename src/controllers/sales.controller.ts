@@ -61,10 +61,10 @@ class SalesController {
 
   public async generatePix() {
     try {
-      const { id } = this.request.params;
       const { authorization } = this.request.headers;
+      const { priceShipping, id } = this.request.body;
       if (!authorization) return this.response.sendStatus(403);
-      const result = await this.service.pixGenerate(Number(id), authorization);
+      const result = await this.service.pixGenerate(Number(id), authorization, Number(priceShipping));
       return this.response.status(200).json(result);
     } catch (error) {
       this.next(error);

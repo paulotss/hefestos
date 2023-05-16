@@ -81,7 +81,7 @@ class SalesService {
     return result;
   }
 
-  public async pixGenerate(productId: number, token: string) {
+  public async pixGenerate(productId: number, token: string, priceShipping: number) {
     const id = JwtToken.getJwtId(token);
     const product = await new ProductService().getById(productId);
     const user = await new UserService().getUserById(id);
@@ -107,13 +107,13 @@ class SalesService {
         {
           name: product.title,
           quantity: 1,
-          unit_amount: product.price * 100
+          unit_amount: (priceShipping + product.price) * 100
         }
       ],
       qr_codes: [
           {
               amount: {
-                  value: product.price * 100
+                  value: (priceShipping + product.price) * 100
               },
               expiration_date: "2023-09-09T20:15:59-03:00"
           }
