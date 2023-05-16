@@ -1,23 +1,28 @@
+import { Op } from 'sequelize';
 import Product from '../database/models/product.model';
 import IProduct from '../interfaces/IProduct';
 import User from '../database/models/users.model';
 import CustomError from '../utils/CustomError';
 import JwtToken from '../utils/JwtToken';
-import fs from 'fs';
-import path from 'path';
 import Sale from '../database/models/sales.model';
 //import { S3Client, DeleteObjectCommand } from '@aws-sdk/client-s3';
 import aws from 'aws-sdk';
 
 class ProductService {
   public async getAll() {
-    const products = await Product.findAll({include: 'category'});
+    const products = await Product.findAll({
+      include: 'category',
+      where: { amount: { [Op.gt]: 0 } }
+    });
     return products;
   }
 
   public async getByCategory(categoryId: number) {
     const products = await Product.findAll({
-      where: { categoryId: categoryId },
+      where: {
+        categoryId: categoryId,
+        amount: { [Op.gt]: 0 }
+      },
       include: 'category'
     });
     if (!products) throw new CustomError('Not found', 404);
