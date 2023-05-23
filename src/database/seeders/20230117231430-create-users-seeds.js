@@ -10,6 +10,7 @@ module.exports = {
         email: "fulanoaum@hefestos.com",
         cpf: "01810755123",
         password: "123456",
+        seller: 1,
       },
       {
         first_name: "Fulanob",
@@ -17,6 +18,7 @@ module.exports = {
         email: "fulanobdois@hefestos.com",
         cpf: "01810755123",
         password: "123456",
+        seller: 1,
       },
       {
         first_name: "Fulanoc",
@@ -24,6 +26,7 @@ module.exports = {
         email: "fuloanoctres@hefestos.com",
         cpf: "01810755123",
         password: "123456",
+        seller: 1,
       },
       {
         first_name: "Fulanod",
@@ -31,6 +34,7 @@ module.exports = {
         email: "fulanodquatro@hefestos.com",
         cpf: "01810755123",
         password: "123456",
+        seller: 1,
       },
       {
         first_name: "Fulanoe",
@@ -38,6 +42,7 @@ module.exports = {
         email: "fuloanoecinco@hefestos.com",
         cpf: "01810755123",
         password: "123456",
+        seller: 1,
       }
     ]);
   },

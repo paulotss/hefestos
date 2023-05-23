@@ -30,6 +30,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
+      seller: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+      },
     });
   },
 

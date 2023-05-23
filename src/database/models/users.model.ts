@@ -8,6 +8,7 @@ class User extends Model {
   declare email: string;
   declare cpf: string;
   declare password: string;
+  declare seller: number;
 }
 
 User.init({
@@ -36,6 +37,10 @@ User.init({
   password: {
     allowNull: false,
     type: STRING,
+  },
+  seller: {
+    allowNull: false,
+    type: INTEGER,
   },
 }, {
   sequelize: db,
