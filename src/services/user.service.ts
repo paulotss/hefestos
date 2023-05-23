@@ -28,7 +28,8 @@ class UserService {
       lastName: user.lastName,
       email: user.email,
       password: user.password,
-      cpf: user.cpf
+      cpf: user.cpf,
+      seller: user.seller
     });
     await Phone.create({
       area: user.area,
