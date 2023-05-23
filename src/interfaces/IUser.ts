@@ -13,6 +13,7 @@ interface IUser {
   number: string;
   street: string;
   locality: string;
+  seller: number;
 }
 
 export default IUser;
