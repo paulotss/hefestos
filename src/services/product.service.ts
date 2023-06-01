@@ -3,7 +3,6 @@ import ProductModel from "../database/models/product.model";
 import IProduct from "../interfaces/IProduct";
 import User from "../database/models/users.model";
 import CustomError from "../utils/CustomError";
-import JwtToken from "../utils/JwtToken";
 import Sale from "../database/models/sales.model";
 import aws from "aws-sdk";
 
@@ -59,7 +58,7 @@ class ProductService {
     return result;
   }
 
-  public async update(id: number, values: any) {
+  public async update(id: number, values: IProduct) {
     const result = await ProductModel.update(values, {
       where: { id: id },
     });

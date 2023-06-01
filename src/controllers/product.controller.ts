@@ -87,7 +87,7 @@ class ProductController {
   public async update() {
     try {
       const { id } = this.request.params;
-      const values = this.request.body;
+      const values: IProduct = this.request.body;
       await this.service.update(Number(id), values);
       this.response.sendStatus(201);
     } catch (error) {
