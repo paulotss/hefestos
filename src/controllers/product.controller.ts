@@ -1,7 +1,8 @@
-import { Request, Response, NextFunction } from 'express';
-import IProduct from '../interfaces/IProduct';
-import ProductService from '../services/product.service';
-import JwtToken from '../utils/JwtToken';
+import { Request, Response, NextFunction } from "express";
+import IProduct from "../interfaces/IProduct";
+import ProductService from "../services/product.service";
+import JwtToken from "../utils/JwtToken";
+import CustomError from "../utils/CustomError";
 
 class ProductController {
   private request: Request;
@@ -17,8 +18,14 @@ class ProductController {
   }
 
   public async getAll() {
-    const products = await this.service.getAll();
-    this.response.status(200).json(products);
+    const { limit } = this.request.query;
+    try {
+      if (!limit) throw new CustomError("Bad Request", 400);
+      const products = await this.service.getAll(Number(limit));
+      this.response.status(200).json(products);
+    } catch (error) {
+      this.next(error);
+    }
   }
 
   public async getByCategory() {
@@ -55,7 +62,9 @@ class ProductController {
   public async getProductsByUserWithSales() {
     const { id } = this.request.params;
     try {
-      const products = await this.service.getProductsByUserWithSales(Number(id));
+      const products = await this.service.getProductsByUserWithSales(
+        Number(id)
+      );
       this.response.status(200).json(products);
     } catch (error) {
       this.next(error);

@@ -10,53 +10,9 @@ import ShippingController from '../controllers/shipping.controller';
 import MulterStorage from '../utils/MulterStorage';
 
 const routes = Router();
-// const storage = multer.diskStorage({
-//   destination: function(_req, _res, cb) {
-//     cb(null, 'src/media')
-//   },
-//   filename: function(_req, file, cb) {
-//     cb(null, Date.now() + extname(file.originalname))
-//   }
-// })
-// const upload = multer({storage: storage});
 const multerStorage = new MulterStorage("s3");
 
-routes.get(
-  '/products',
-  (req, res, next) => new ProductController(req, res, next).getAll()
-);
 
-routes.get(
-  '/products/:id',
-  (req, res, next) => new ProductController(req, res, next).getByCategory()
-);
-
-routes.get(
-  '/product/:id',
-  (req, res, next) => new ProductController(req, res, next).getById()
-);
-
-routes.get(
-  '/user/products',
-  (req, res, next) => AuthHandle.auth(req, res, next),
-  (req, res, next) => new ProductController(req, res, next).getByUserId()
-);
-
-routes.post(
-  '/product',
-  multer(multerStorage.multerConfig()).single('file'),
-  (req, res, next) => new ProductController(req, res, next).create()
-);
-
-routes.put(
-  '/product/:id',
-  (req, res, next) => new ProductController(req, res, next).update()
-);
-
-routes.delete(
-  '/product/:id',
-  (req, res, next) => new ProductController(req, res, next).remove()
-);
 
 routes.post(
   '/login',
@@ -82,11 +38,6 @@ routes.get(
 routes.get(
   '/category/:id',
   (req, res, next) => new CategoryController(req, res, next).getById()
-);
-
-routes.delete(
-  '/product/:id',
-  (req, res, next) => new ProductController(req, res, next).remove()
 );
 
 routes.post(
@@ -125,23 +76,17 @@ routes.post(
 );
 
 routes.get(
-  '/product/sales/:id',
-  (req, res, next) => new ProductController(req, res, next).getProductsByUserWithSales()
-);
-
-routes.get(
   '/sale/product/user',
   (req, res, next) => new SalesController(req, res, next).getByProductUserId()
 );
 
 routes.get(
-  '/sale/product/:id',
-  (req, res, next) => new SalesController(req, res, next).getByProductId()
-);
-
-routes.get(
   '/shippings',
   (req, res, next) => new ShippingController(req, res, next).getAll()
+);
+
+routes.get("/sale/product/:id", (req, res, next) =>
+  new SalesController(req, res, next).getByProductId()
 );
 
 export default routes;
