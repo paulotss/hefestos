@@ -92,16 +92,11 @@ class ProductService {
     return result;
   }
 
-  public async getByUserId(token: string) {
-    const jwt = JwtToken.verifyToken(token);
-    if (typeof jwt !== "string") {
-      const { id } = jwt.data;
-      const result = await ProductModel.findAll({
-        where: { userId: id },
-      });
-      return result;
-    }
-    throw new CustomError("Invalid token", 403);
+  public async getByUserId(id: number) {
+    const result = await ProductModel.findAll({
+      where: { userId: id },
+    });
+    return result;
   }
 
   public async getProductsByUserWithSales(id: number) {

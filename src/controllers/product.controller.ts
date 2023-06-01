@@ -38,11 +38,10 @@ class ProductController {
     }
   }
 
-  public async getByUserId() {
-    const { authorization } = this.request.headers;
-    if (!authorization) return this.response.sendStatus(403);
+  public async getByUserToken() {
+    const { jwt } = this.response.locals;
     try {
-      const result = await this.service.getByUserId(authorization);
+      const result = await this.service.getByUserId(Number(jwt.data.id));
       return this.response.status(200).json(result);
     } catch (error) {
       this.next(error);

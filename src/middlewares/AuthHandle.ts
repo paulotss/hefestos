@@ -1,19 +1,15 @@
-import { Request, Response, NextFunction } from 'express';
-import JwtToken from '../utils/JwtToken';
+import { Request, Response, NextFunction } from "express";
+import JwtToken from "../utils/JwtToken";
 
 class AuthHandle {
-  public static auth(
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ) {
+  public static auth(req: Request, res: Response, next: NextFunction) {
     const { authorization } = req.headers;
     if (authorization) {
       try {
-        JwtToken.verifyToken(authorization);
+        res.locals.jwt = JwtToken.verifyToken(authorization);
         return next();
       } catch (err) {
-        return res.sendStatus(430)
+        return res.sendStatus(403);
       }
     }
     res.sendStatus(403);

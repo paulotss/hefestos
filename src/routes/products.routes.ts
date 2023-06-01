@@ -22,7 +22,7 @@ routes.get("/product/:id", (req, res, next) =>
 routes.get(
   "/user/products",
   (req, res, next) => AuthHandle.auth(req, res, next),
-  (req, res, next) => new ProductController(req, res, next).getByUserId()
+  (req, res, next) => new ProductController(req, res, next).getByUserToken()
 );
 
 routes.post(
