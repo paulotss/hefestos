@@ -38,6 +38,17 @@ class ProductController {
     }
   }
 
+  public async getByTitle() {
+    const { term } = this.request.query;
+    const title = typeof term === "string" ? term : "";
+    try {
+      const products = await this.service.getByTitle(title);
+      this.response.status(200).json(products);
+    } catch (error) {
+      this.next(error);
+    }
+  }
+
   public async getByUserToken() {
     const { jwt } = this.response.locals;
     try {

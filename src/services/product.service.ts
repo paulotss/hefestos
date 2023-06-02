@@ -41,6 +41,14 @@ class ProductService {
     return products;
   }
 
+  public async getByTitle(title: string) {
+    console.log(title);
+    const products = await ProductModel.findAll({
+      where: { title: { [Op.substring]: title } },
+    });
+    return products;
+  }
+
   public async create(product: IProduct) {
     const result = await ProductModel.create({
       title: product.title,

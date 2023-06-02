@@ -19,6 +19,10 @@ routes.get("/product/:id", (req, res, next) =>
   new ProductController(req, res, next).getById()
 );
 
+routes.get("/search", (req, res, next) =>
+  new ProductController(req, res, next).getByTitle()
+);
+
 routes.get(
   "/user/products",
   (req, res, next) => AuthHandle.auth(req, res, next),
