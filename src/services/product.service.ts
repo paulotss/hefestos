@@ -67,6 +67,10 @@ class ProductService {
   }
 
   public async update(id: number, values: IProduct) {
+    const product = await this.getById(id);
+    if (values.cover != product.cover) {
+      await this.deleteFileAWS(product.cover);
+    }
     const result = await ProductModel.update(values, {
       where: { id: id },
     });
@@ -80,21 +84,7 @@ class ProductService {
       where: { id: id },
     });
 
-    const s3 = new aws.S3();
-    s3.config.update({
-      region: process.env.AWS_REGION,
-      credentials: {
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID || "",
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || "",
-      },
-    });
-
-    await s3
-      .deleteObject({
-        Bucket: process.env.AWS_S3_BUCKET || "",
-        Key: product.cover,
-      })
-      .promise();
+    await this.deleteFileAWS(product.cover);
 
     return result;
   }
@@ -116,6 +106,24 @@ class ProductService {
     });
     if (!result) throw new CustomError("Not Found", 404);
     return result;
+  }
+
+  private async deleteFileAWS(name: string) {
+    const s3 = new aws.S3();
+    s3.config.update({
+      region: process.env.AWS_REGION,
+      credentials: {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID || "",
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || "",
+      },
+    });
+
+    await s3
+      .deleteObject({
+        Bucket: process.env.AWS_S3_BUCKET || "",
+        Key: name,
+      })
+      .promise();
   }
 }
 
