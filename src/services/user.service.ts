@@ -6,12 +6,13 @@ import ILogin from "../interfaces/ILogin";
 import IUser from "../interfaces/IUser";
 import CustomError from "../utils/CustomError";
 import JwtToken from "../utils/JwtToken";
+import EmailSender from "../utils/EmailSender";
 
 class UserService {
   public async login(data: ILogin) {
     const { email, password } = data;
     const result = await User.findOne({
-      where: { email, password }
+      where: { email, password },
     });
     if (!result) throw new CustomError("Not found", 404);
     const objToken = new JwtToken(result);
@@ -20,7 +21,7 @@ class UserService {
 
   public async create(user: IUser) {
     const exist = await User.findOne({
-      where: { email: user.email }
+      where: { email: user.email },
     });
     if (exist) throw new CustomError("Email already exists", 409);
     const newUser = await User.create({
@@ -29,13 +30,13 @@ class UserService {
       email: user.email,
       password: user.password,
       cpf: user.cpf,
-      seller: user.seller
+      seller: user.seller,
     });
     await Phone.create({
       area: user.area,
       number: user.cellPhone,
       type: "MOBILE",
-      userId: newUser.id
+      userId: newUser.id,
     });
     await Address.create({
       cep: user.cep,
@@ -45,8 +46,10 @@ class UserService {
       number: user.number,
       street: user.street,
       locality: user.locality,
-      userId: newUser.id
+      userId: newUser.id,
     });
+    const emailSender = new EmailSender(newUser.email, newUser.firstName);
+    emailSender.sendWelcome();
     return newUser;
   }
 
@@ -54,8 +57,8 @@ class UserService {
     const user = await User.findByPk(id, {
       include: {
         model: Address,
-        as: 'address'
-      }
+        as: "address",
+      },
     });
     if (!user) throw new CustomError("Not Found!", 404);
     return user;
@@ -65,7 +68,7 @@ class UserService {
     const user = await User.findByPk(id, {
       include: {
         model: Sale,
-      }
+      },
     });
     if (!user) throw new CustomError("Not Found", 404);
     return user;
@@ -75,9 +78,9 @@ class UserService {
     const result = await User.findByPk(Number(id), {
       include: [
         { model: Address, as: "address" },
-        { model: Phone, as: "phones" }
+        { model: Phone, as: "phones" },
       ],
-        attributes: { exclude: ['password'] }
+      attributes: { exclude: ["password"] },
     });
     if (!result) throw new CustomError("Not Found", 404);
     return result;
