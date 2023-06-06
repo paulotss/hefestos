@@ -31,12 +31,15 @@ routes.get(
 
 routes.post(
   "/product",
+  (req, res, next) => AuthHandle.auth(req, res, next),
   multer(multerStorage.multerConfig()).single("file"),
   (req, res, next) => new ProductController(req, res, next).create()
 );
 
-routes.put("/product/:id", (req, res, next) =>
-  new ProductController(req, res, next).update()
+routes.put(
+  "/product/:id",
+  multer(multerStorage.multerConfig()).single("file"),
+  (req, res, next) => new ProductController(req, res, next).update()
 );
 
 routes.delete("/product/:id", (req, res, next) =>
