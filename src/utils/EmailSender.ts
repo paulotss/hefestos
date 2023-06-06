@@ -45,6 +45,92 @@ class EmailSender {
       return error;
     }
   }
+
+  public async sendReceipt(description: string, amount: string, total: string) {
+    const templateKey = process.env.MAILER_TEMPLATE_RECEIPT || "xyz";
+    const variables = [
+      {
+        email: this.email,
+        substitutions: [
+          {
+            var: "name",
+            value: this.name,
+          },
+          {
+            var: "description",
+            value: description,
+          },
+          {
+            var: "amount",
+            value: amount,
+          },
+          {
+            var: "total",
+            value: total,
+          },
+        ],
+      },
+    ];
+
+    const emailParams = new EmailParams()
+      .setFrom(this.sender)
+      .setTo(this.recipients)
+      .setSubject("Recibo")
+      .setTemplateId(templateKey)
+      .setVariables(variables);
+
+    try {
+      const response = await this.mailerSend.email.send(emailParams);
+      return response;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  public async sendNotification(
+    description: string,
+    amount: string,
+    total: string
+  ) {
+    const templateKey = process.env.MAILER_TEMPLATE_NOTIFICATION || "xyz";
+    const variables = [
+      {
+        email: this.email,
+        substitutions: [
+          {
+            var: "name",
+            value: this.name,
+          },
+          {
+            var: "description",
+            value: description,
+          },
+          {
+            var: "amount",
+            value: amount,
+          },
+          {
+            var: "total",
+            value: total,
+          },
+        ],
+      },
+    ];
+
+    const emailParams = new EmailParams()
+      .setFrom(this.sender)
+      .setTo(this.recipients)
+      .setSubject("Recibo")
+      .setTemplateId(templateKey)
+      .setVariables(variables);
+
+    try {
+      const response = await this.mailerSend.email.send(emailParams);
+      return response;
+    } catch (error) {
+      return error;
+    }
+  }
 }
 
 export default EmailSender;
