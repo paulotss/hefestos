@@ -14,6 +14,8 @@ class ProductModel extends Model {
   declare depth: number;
   declare weight: number;
   declare price: number;
+  declare categoryId: number;
+  declare userId: number;
 }
 
 ProductModel.init(

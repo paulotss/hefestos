@@ -10,6 +10,8 @@ import User from "../database/models/users.model";
 import Address from "../database/models/address.model";
 import JwtToken from "../utils/JwtToken";
 import Shipping from "../database/models/shippgins.model";
+import EmailSender from "../utils/EmailSender";
+import ShippingService from "./shipping.service";
 
 class SalesService {
   private baseUrl: string;
@@ -88,6 +90,28 @@ class SalesService {
       status: "paid",
       shippingId: shippingId,
     });
+    const product = await new ProductService().getById(productId);
+    const userClient = await new UserService().getUserById(userId);
+    const userSeller = await new UserService().getUserById(product.userId);
+    const shipping = await new ShippingService().getById(shippingId);
+    const emailClient = new EmailSender(userClient.email, userClient.firstName);
+    emailClient.sendReceipt(
+      product.title,
+      "1",
+      (product.price + shipping.price).toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      })
+    );
+    const emailSeller = new EmailSender(userSeller.email, userClient.firstName);
+    emailSeller.sendNotification(
+      product.title,
+      "1",
+      (product.price + shipping.price).toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      })
+    );
     return result;
   }
 
