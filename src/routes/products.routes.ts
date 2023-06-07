@@ -46,10 +46,6 @@ routes.delete("/product/:id", (req, res, next) =>
   new ProductController(req, res, next).remove()
 );
 
-routes.delete("/product/:id", (req, res, next) =>
-  new ProductController(req, res, next).remove()
-);
-
 routes.get("/product/sales/:id", (req, res, next) =>
   new ProductController(req, res, next).getProductsByUserWithSales()
 );
