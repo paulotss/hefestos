@@ -81,11 +81,12 @@ class SalesService {
     return result;
   }
 
-  public async create(userId: number, productId: number) {
+  public async create(userId: number, productId: number, shippingId: number) {
     const result = await Sale.create({
       userId: userId,
       productId: productId,
       status: "paid",
+      shippingId: shippingId,
     });
     return result;
   }
