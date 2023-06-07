@@ -7,7 +7,7 @@ module.exports = {
       {
         title: "Escultura Pena da Maat",
         description: "2023, Fundição a frio, resina com pó de ferro, 10 x 4 x 4 cm",
-        cover: "1680620497916.jpg",
+        cover: "1686148865609.jpg",
         price: 25,
         amount: 10,
         user_id: 1,
